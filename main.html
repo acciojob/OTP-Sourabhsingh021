@@ -1,115 +1,126 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OTP Entry Frontend</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        #wrapper {
-            width: 100vw;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+    #wrapper {
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #f5f5f5;
+    }
 
-        #container {
-            width: 80%;
-            height: 70%;
-            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-            border-radius: 5px;
-            margin: auto;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            gap: 0.5rem;
-        }
+    #container {
+      width: 80%;
+      max-width: 700px;
+      min-height: 300px;
+      box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+      border-radius: 5px;
+      background: #ffffff;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 2rem;
+      text-align: center;
+    }
 
-        #verification_heading {
-            color: #000000;
-            font-size: 18px;
-        }
+    #verification_heading {
+      color: #000000;
+      font-size: 18px;
+    }
 
-        #verification_subtext {
-            color: #757575;
-            font-size: 12px;
-        }
+    #verification_subtext {
+      color: #757575;
+      font-size: 12px;
+      max-width: 500px;
+      line-height: 1.5;
+    }
 
-        .code {
-            width: 50px;
-            height: 50px;
-            text-align: center;
-            font-size: 24px;
-            border: 1px solid #757575;
-            background-color: #FFFFFF;
-            border-radius: 5px;
-        }
+    .code-container {
+      display: flex;
+      gap: 10px;
+      margin-top: 15px;
+    }
 
-        .code:focus {
-            outline: 1px solid blue;
-            border: none;
-        }
+    .code {
+      width: 50px;
+      height: 50px;
+      text-align: center;
+      font-size: 24px;
+      border: 1px solid #757575;
+      background-color: #ffffff;
+      border-radius: 5px;
+    }
 
-        .code::placeholder {
-            color: gray;
-            font-size: 25px;
-        }
+    .code:focus {
+      outline: 1px solid blue;
+      border: 1px solid blue;
+    }
 
-        .code-container {
-            margin-top: 15px;
-        }
-    </style>
+    .code::placeholder {
+      color: gray;
+      font-size: 25px;
+    }
+  </style>
 </head>
-
 <body>
-    <div id="wrapper">
-        <div id="container">
-            <h1 id="verification_heading">Verify your Account</h1>
-            <p id="verification_subtext">We emailed you the six digit code to acciojob@email.com Enter the code below to
-                confirm your email address.</p>
+  <div id="wrapper">
+    <div id="container">
+      <h1 id="verification_heading">Verify Your Account</h1>
+      <p id="verification_subtext">
+        We emailed you the six digit code to acciojob@email.com Enter the code below to confirm your email address.
+      </p>
 
-            <div class="code-container">
-                <input type="text" class="code" placeholder="0" maxlength="1">
-                <input type="text" class="code" placeholder="0" maxlength="1">
-                <input type="text" class="code" placeholder="0" maxlength="1">
-                <input type="text" class="code" placeholder="0" maxlength="1">
-                <input type="text" class="code" placeholder="0" maxlength="1">
-                <input type="text" class="code" placeholder="0" maxlength="1">
-            </div>
-        </div>
+      <div class="code-container">
+        <input type="text" class="code" id="code-1" placeholder="0" maxlength="1" inputmode="numeric" />
+        <input type="text" class="code" id="code-2" placeholder="0" maxlength="1" inputmode="numeric" />
+        <input type="text" class="code" id="code-3" placeholder="0" maxlength="1" inputmode="numeric" />
+        <input type="text" class="code" id="code-4" placeholder="0" maxlength="1" inputmode="numeric" />
+        <input type="text" class="code" id="code-5" placeholder="0" maxlength="1" inputmode="numeric" />
+        <input type="text" class="code" id="code-6" placeholder="0" maxlength="1" inputmode="numeric" />
+      </div>
     </div>
-    <script>
-        const codes = document.querySelectorAll(".code");
+  </div>
 
-        codes[0].focus();
+  <script>
+    const codes = document.querySelectorAll(".code");
 
-        codes.forEach((input, index) => {
-            input.addEventListener("input", () => {
-                if (input.value && index < codes.length - 1) {
-                    codes[index + 1].focus();
-                }
-            });
+    if (codes.length > 0) {
+      codes[0].focus();
+    }
 
-            input.addEventListener("keydown", (e) => {
-                if (e.key === "Backspace") {
-                    if (input.value !== "") {
-                        input.value = "";
-                    }
-                    else if (index > 0) {
-                        codes[index - 1].focus();
-                        codes[index - 1].value = "";
-                    }
-                }
-            });
-        });
-    </script>
+    codes.forEach((input, index) => {
+      input.addEventListener("input", () => {
+        input.value = input.value.replace(/[^0-9]/g, "");
+
+        if (input.value && index < codes.length - 1) {
+          codes[index + 1].focus();
+        }
+      });
+
+      input.addEventListener("keydown", (e) => {
+        if (e.key === "Backspace") {
+          if (input.value !== "") {
+            input.value = "";
+          } else if (index > 0) {
+            codes[index - 1].focus();
+            codes[index - 1].value = "";
+          }
+        }
+      });
+    });
+  </script>
 </body>
 </html>
