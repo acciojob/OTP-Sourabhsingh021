@@ -4,11 +4,9 @@
     padding: 0;
     box-sizing: border-box;
 }
-
 #code-container{
     display: flex;
 }
-
 #wrapper{
     width: 100vw;
     height: 100vh;
@@ -16,7 +14,6 @@
     justify-content: center;
     align-items: center;
 }
-
 #container{
     width: 80%;
     height: 70%;
@@ -29,17 +26,14 @@
     align-items: center;
     gap: 0.5rem;
 }
-
 #verification_heading{
     color: #000000;
     font-size: 18px;
 }
-
 #verification_subtext{
     color: #757575;
     font-size: 12px;
 }
-
 .code{
     width: 50px;
     height: 50px;
@@ -49,16 +43,13 @@
     background-color: #FFFFFF;
     border-radius: 5px;
 }
-
 .code:focus{
     outline: none;
 }
-
 .code::placeholder{
     color: gray;
     font-size: 25px;
 }
-
 .code-container{
     margin-top: 15px;
 }
